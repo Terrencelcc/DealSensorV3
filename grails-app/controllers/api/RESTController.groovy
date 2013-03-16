@@ -64,6 +64,9 @@ class RESTController {
 						iconUri(a.iconUri)
 						category(a.dealCategories)
 						location(latitude:a.supplier.latitude,longitude:a.supplier.longitude)
+						origPrice(a.originalPrice)
+						curPrice(a.currentPrice)
+						numOfHits(a.numberofHits)
 						//range(this.dist)
 					}
 				}
@@ -75,6 +78,7 @@ class RESTController {
 		def iden=params.id
 		def deal=Deal.findById(iden)
 		println deal
+		deal.numberofHits+=1
 		//render deal as XML
 		render(contentType: "text/xml"){
 			details(){
@@ -85,6 +89,9 @@ class RESTController {
 				dateCreated(deal.dateCreated)
 				description(deal.description)
 				categories(deal.dealCategories)
+				origPrice(deal.originalPrice)
+				curPrice(deal.currentPrice)
+				numOfHits(deal.numberofHits)
 				supplier{
 					supplierId(deal.supplier.id)
 					name(deal.supplier.name)
@@ -111,7 +118,7 @@ class RESTController {
 		//@Grab(group='org.ccil.cowan.tagsoup', module='tagsoup', version='1.2.1' )
 		def tagsoupParser = new Parser()
 		def slurper = new XmlSlurper(tagsoupParser)
-		def url = "files/restaurants.html"
+		def url = "https://raw.github.com/Terrencelcc/DealSensorV3/master/files/restaurants.html"
 		def htmlParser = slurper.parse(url)
 		
 		def loc_tagsoupParser = new org.ccil.cowan.tagsoup.Parser()
@@ -163,7 +170,7 @@ class RESTController {
 					def addrStr=addrlvls.toString();
 					def supplierInstance
 					try{
-						supplierInstance=new Supplier(name:name,address:addrStr,password:"11111111",phone:phone,latitude:latiDou,longitude:longiDou)
+						supplierInstance=new Supplier(username:name,address:addrStr,password:"TL@123456",phone:phone,latitude:latiDou,longitude:longiDou)
 						cuisines.each{
 							def categoryInstance=new Category(name:it)
 							categoryInstance.save(flush:true)
@@ -251,7 +258,7 @@ class RESTController {
 						def addrStr=addrlvls.toString();
 						def supplierInstance
 						try{
-							supplierInstance=new Supplier(name:name,address:addrStr,password:"11111111",phone:phone,latitude:latiDou,longitude:longiDou)
+							supplierInstance=new Supplier(username:name,address:addrStr,password:"TL@123456",phone:phone,latitude:latiDou,longitude:longiDou)
 							cuisines.each{
 								def categoryInstance=new Category(name:it)
 								categoryInstance.save(flush:true)
@@ -334,4 +341,3 @@ class RESTController {
 		return (rad * 180 / Math.PI);
 	}
 }
-

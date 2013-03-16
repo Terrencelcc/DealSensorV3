@@ -4,6 +4,7 @@ class SecUser {
 
 	transient springSecurityService
 
+	long id
 	String username
 	String password
 	boolean enabled

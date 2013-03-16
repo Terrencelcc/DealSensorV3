@@ -1,5 +1,4 @@
 <%@ page import="ds.Deal" %>
-<r:require module="jquery-ui"/>
 
 
 
