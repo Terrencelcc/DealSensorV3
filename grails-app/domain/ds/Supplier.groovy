@@ -1,11 +1,8 @@
 package ds
 
-class Supplier {
+class Supplier extends SecUser{
 	static expose='supplier'
-	
-	long id
-	String name
-	String password
+
 	String description
 	String email
 	String phone

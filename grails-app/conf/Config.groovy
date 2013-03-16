@@ -14,6 +14,23 @@
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
+
+grails.plugin.cloudfoundry.username = 'lirh90@gmail.com'
+grails.plugin.cloudfoundry.password = 'tl900420'
+
+grails {
+	mail {
+	  host = "smtp.gmail.com"
+	  port = 465
+	  username = "lirh90@gmail.com"
+	  password = "TCL900420"
+	  props = ["mail.smtp.auth":"true",
+			   "mail.smtp.socketFactory.port":"465",
+			   "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+			   "mail.smtp.socketFactory.fallback":"false"]
+	}
+ }
+
 grails.mime.types = [
     all:           '*/*',
     atom:          'application/atom+xml',
@@ -89,3 +106,8 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'ds.SecUser'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'ds.SecUserSecRole'
+grails.plugins.springsecurity.authority.className = 'ds.SecRole'
